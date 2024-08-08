@@ -2,6 +2,9 @@ name: CI
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        required: true
 
 jobs:
   build:
@@ -19,7 +22,7 @@ jobs:
               await github.rest.git.createRef({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                ref: "refs/tags/release/${{ steps.nbgv.outputs.SimpleVersion }}",
+                ref: "refs/tags/release/${{ github.event.inputs.tag }}",
                 sha: context.sha
               });
             }
@@ -28,7 +31,7 @@ jobs:
                 var ref = await github.rest.git.getRef({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  ref: "refs/tags/release/${{ steps.nbgv.outputs.SimpleVersion }}",
+                  ref: "refs/tags/release/${{ github.event.inputs.tag }}",
                 };
                 if (ref.data.object.sha == context.sha) {
                   return;
