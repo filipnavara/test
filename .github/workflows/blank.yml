@@ -27,7 +27,7 @@ jobs:
               });
             }
             catch (err) {
-              if (err.status == 409) {
+              if (err.status >= 400) {
                 var ref = await github.rest.git.getRef({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
