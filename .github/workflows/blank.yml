@@ -32,7 +32,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   ref: "refs/tags/release/${{ github.event.inputs.tag }}",
-                };
+                });
                 if (ref.data.object.sha == context.sha) {
                   return;
                 }
