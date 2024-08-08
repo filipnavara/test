@@ -31,7 +31,7 @@ jobs:
                 var ref = await github.rest.git.getRef({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  ref: "refs/tags/release/${{ github.event.inputs.tag }}",
+                  ref: "tags/release/${{ github.event.inputs.tag }}",
                 });
                 if (ref.data.object.sha == context.sha) {
                   return;
